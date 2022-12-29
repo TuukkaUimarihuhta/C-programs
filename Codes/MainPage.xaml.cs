@@ -35,7 +35,7 @@ namespace Codes
         // kertaa navigoida samaan sivuun, jätetään se huomiotta
         private NavigationViewItem _lastItem;
 
-        // HUOM! Vaihda tähän oman UWP-projektisi nimi! (näkyy Solution Explorerissa ylimpänä)
+        
         private string projectName = "Codes";
 
         // jotain painettiin valikosta, päätetään mitä tehdään
