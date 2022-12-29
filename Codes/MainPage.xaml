@@ -9,10 +9,18 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <NavigationView>
+        <NavigationView x:Name="NavView" 
+					ItemInvoked="NavigationView_OnItemInvoked"
+					BackRequested="NavView_OnBackRequested"
+					IsSettingsVisible="False"
+					IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}">
             <NavigationView.MenuItems>
                 <Button Name="exit" Click="exit_Click">Sulje ohjelma</Button>
+                <ToggleButton Name="drkmd" IsThreeState="False" Checked="drkmd_Checked" Unchecked="drkmd_Unchecked">Dark mode</ToggleButton>
             </NavigationView.MenuItems>
+
+            <Frame x:Name="ContentFrame" 
+			   NavigationFailed="ContentFrame_OnNavigationFailed"/>
         </NavigationView>
 
     </Grid>
