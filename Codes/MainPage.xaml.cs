@@ -106,13 +106,18 @@ namespace Codes
             MessageDialog confirmDialog = new MessageDialog(Content, Title);
             confirmDialog.Commands.Add(new UICommand("Yes"));
             confirmDialog.Commands.Add(new UICommand("No"));
-            var confirmResult = await confirmDialog.ShowAsync();
+            IUICommand confirmResult = await confirmDialog.ShowAsync();
 
-            // "No" button is pressed, dialogbox closes, app keeps running
-            if (confirmResult != null && confirmResult.Label == "No") { return; }
-
-            // "Yes" button is pressed: the app closes
-            if (confirmResult == null || confirmResult.Label == "Yes") { App.Current.Exit(); }
+            /* "No" button is pressed, dialogbox closes, app keeps running,
+                pressing "Yes" will close the app*/
+            switch (confirmResult.Label)
+            {
+                case "No":
+                    return;
+                case "Yes":
+                    Application.Current.Exit();
+                    break;
+            }
         }
 
         // turn on Dark mode on in the application
