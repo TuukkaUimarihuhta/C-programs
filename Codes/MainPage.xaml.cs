@@ -30,63 +30,64 @@ namespace Codes
             this.InitializeComponent();
         }
 
-        // tämä pitää kirjaa siitä mitä sivua viimeksi käytettiin
-        // tätä hyödynnetään lähinnä siinä, että jos yritetään kaksi
-        // kertaa navigoida samaan sivuun, jätetään se huomiotta
+        // this keeps track of which page was last accessed
+        /* this is mainly used in that if the same page is attempted to navigate two times,
+         the second time gets ignored  */
+  
         private NavigationViewItem _lastItem;
 
         
         private string projectName = "Codes";
 
-        // jotain painettiin valikosta, päätetään mitä tehdään
+        // something was clicked from the menu, let's decide what to do
         private void NavigationView_OnItemInvoked(
             Windows.UI.Xaml.Controls.NavigationView sender,
             NavigationViewItemInvokedEventArgs args)
         {
-            // haetaan klikattu NavigationViewItem
+            // the clicked NavigationViewItem is fetched
             var item = args.InvokedItemContainer as NavigationViewItem;
 
-            // jos Itemiä ei löydy, jätetään pyyntö kesken
+            // if Item is not found, query is left unfinished
             if (item == null || item == _lastItem)
                 return;
 
-            // jos Itemistä ei löydy Tagia, oletuksena on silloin Settings
-            // tässä tapauksessa settingsview on otettu pois käytöstä myös XAMLin puolella
+            // if Item doesn't have a tag, default is Settings
+            // settingsview has been taken off use in XAML as well
             var clickedView = item.Tag?.ToString() ?? "SettingsView";
 
-            // jos navigointi epäonnistuu, jätetään kesken
+            // if navigation fails, it is left unfinished
             if (!NavigateToView(clickedView)) return;
 
+            // _lastItem gets the value of the item we clicked
             _lastItem = item;
         }
 
-        // suoritetaan varsinainen navigaatio, tätä kutsuu lähinnä
-        // NavigationView_OnItemInvoked
+        // the actual navigation is performed, mostly called NavigationView_OnItemInvoked
         private bool NavigateToView(string clickedView)
         {
-            // yritetään hakea sopiva sivu Views -kansiosta
+            // an attempt is made to retrieve a suitable page from the Views folder
             var view = System.Reflection.Assembly.GetExecutingAssembly()
                 .GetType($"{projectName}.Views.{clickedView}");
 
-            // jos haluttua sivua ei löydy, jätetään navigointi kesken
+            // if the desired page is not found, the navigation is left unfinished
             if (string.IsNullOrWhiteSpace(clickedView) || view == null)
             {
                 return false;
             }
 
-            // navigoidaan valittu sivu ContentFrameen
+            // navigates the selected page to the ContentFrame
             ContentFrame.Navigate(view, null, new EntranceNavigationTransitionInfo());
             return true;
         }
 
-        // jos navigointi epäonnistuu, kaadetaan ohjelma
+        // if the navigation fails, the program crashes
         private void ContentFrame_OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new NavigationException(
                 $"Navigation failed {e.Exception.Message} for {e.SourcePageType.FullName}");
         }
 
-        // käsitellään Back-painike => mennään edelliseen sivuun takaisin
+        // processed Back button => go back to the previous page
         private void NavView_OnBackRequested(
             Windows.UI.Xaml.Controls.NavigationView sender,
             NavigationViewBackRequestedEventArgs args)
@@ -94,41 +95,47 @@ namespace Codes
             if (ContentFrame.CanGoBack)
                 ContentFrame.GoBack();
         }
+
+        // button for turning off the application.
         private async void exit_Click(object sender, RoutedEventArgs e)
         {
-            // Nappi applikaation sammuttamista varten.
-            const string Content = "Oletko varma, että haluat sulkea ohjelman?";
-            const string Title = "Sammuta ohjelma";
+            const string Content = "Are you sure you wanto close this app?";
+            const string Title = "Close app";
 
+            // creates a new dialog popup box with two variables
             MessageDialog confirmDialog = new MessageDialog(Content, Title);
-            confirmDialog.Commands.Add(new UICommand("Kyllä"));
-            confirmDialog.Commands.Add(new UICommand("Ei"));
+            confirmDialog.Commands.Add(new UICommand("Yes"));
+            confirmDialog.Commands.Add(new UICommand("No"));
             var confirmResult = await confirmDialog.ShowAsync();
 
-            if (confirmResult != null && confirmResult.Label == "Ei") { return; }
+            // "No" button is pressed, dialogbox closes, app keeps running
+            if (confirmResult != null && confirmResult.Label == "No") { return; }
 
-            if (confirmResult == null || confirmResult.Label == "Kyllä") { App.Current.Exit(); }
+            // "Yes" button is pressed: the app closes
+            if (confirmResult == null || confirmResult.Label == "Yes") { App.Current.Exit(); }
         }
 
+        // turn on Dark mode on in the application
         private void drkmd_Checked(object sender, RoutedEventArgs e)
-        {// Laittaa applikaatioon Dark moden päälle
+        {
             if (Window.Current.Content is FrameworkElement frameworkElement)
             {
-                frameworkElement.RequestedTheme = ElementTheme.Dark;
-                drkmd.Content = "Light mode";
+                frameworkElement.RequestedTheme = ElementTheme.Dark;  // changes the framework to dark ElementTheme
+                drkmd.Content = "Light mode";                         // changes the dark mode button text to Light mode
             }
         }
 
+        // turn Light mode on in the application
         private void drkmd_Unchecked(object sender, RoutedEventArgs e)
-        {//laittaa applikaatioon Light moden päälle
+        {
             if (Window.Current.Content is FrameworkElement frameworkElement)
             {
-                frameworkElement.RequestedTheme = ElementTheme.Light;
-                drkmd.Content = "Dark mode";
+                frameworkElement.RequestedTheme = ElementTheme.Light; // changes the framework to light ElementTheme
+                drkmd.Content = "Dark mode";                          // changes the dark mode button text to Dark mode
             }
         }
 
-        // oma poikkeustyyppi navigointiongelmille
+        // own exception type for navigation problems
         internal class NavigationException : Exception
         {
             public NavigationException(string msg) : base(msg)
