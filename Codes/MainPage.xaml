@@ -15,8 +15,10 @@
 					IsSettingsVisible="False"
 					IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}">
             <NavigationView.MenuItems>
-                <Button Name="exit" Click="exit_Click">Sulje ohjelma</Button>
+                <Button Name="exit" Click="exit_Click">Close the prgram</Button>
                 <ToggleButton Name="drkmd" IsThreeState="False" Checked="drkmd_Checked" Unchecked="drkmd_Unchecked">Dark mode</ToggleButton>
+                <NavigationViewItemHeader>Different programs</NavigationViewItemHeader>
+                <NavigationViewItem Content="Color switching square" Icon="DockLeft" Tag="ColorSquare"/>
             </NavigationView.MenuItems>
 
             <Frame x:Name="ContentFrame" 
