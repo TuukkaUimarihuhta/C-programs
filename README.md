@@ -1,3 +1,3 @@
-# Navigationviewer
+# C# programs
 
-This project has a navigationviewer with different programs in it
+This project has a NavigationViewer with different programs in it
