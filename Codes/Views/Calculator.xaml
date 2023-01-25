@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
         
         <!-- Textblock, where the text from the buttons come to -->
-        <TextBlock Name="calcText" Text="0" FontSize="50"
+        <TextBlock Name="calcText" Text="0" FontSize="50" Padding="20,40"
                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
                    Grid.Row="1" Grid.ColumnSpan="4"></TextBlock>
         
