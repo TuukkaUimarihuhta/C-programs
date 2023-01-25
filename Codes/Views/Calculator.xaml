@@ -35,11 +35,11 @@
         <Border Grid.Row="2" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="2" />
         <Border Grid.Row="4" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="2"/>
         <Border Grid.Row="6" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="2"/>
+        <Border Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="5" BorderBrush="Black" BorderThickness="2,2"/>
         <!-- Grid.column decides where the vertical lines start,rowSpan decides how far those lines go -->
         <Border Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" BorderBrush="Black" BorderThickness="2,0"/>
         <Border Grid.Column="2" Grid.Row="2" Grid.RowSpan="5" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="4" Grid.Row="2" Grid.RowSpan="5" BorderBrush="Black" BorderThickness="2"/>
-        
+
         <Button Grid.Row="2" Grid.Column="0" BorderThickness="5" Name="AC" Height="166" Width="375" FontSize="35" HorizontalAlignment="Center" Click="AC_Click">AC</Button>
         <Button Grid.Row="2" Grid.Column="1" Name="PlusMinus" Height="166" Width="375" FontSize="35" HorizontalAlignment="Center" Click="Plus_Minus_Click">+/-</Button>
     </Grid>
