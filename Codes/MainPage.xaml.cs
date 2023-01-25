@@ -99,7 +99,7 @@ namespace Codes
         // button for turning off the application.
         private async void exit_Click(object sender, RoutedEventArgs e)
         {
-            const string Content = "Are you sure you wanto close this app?";
+            const string Content = "Are you sure you want to close this app?";
             const string Title = "Close app";
 
             // creates a new dialog popup box with two variables
