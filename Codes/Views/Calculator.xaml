@@ -1,0 +1,132 @@
+﻿<Page
+    x:Class="Codes.Views.Calculator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Codes.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <!-- Can be used to style certain attributes in the page -->
+    <Page.Resources>
+        <!-- Styling for buttons, margin, color, border and corner radius -->
+        <Style TargetType="Button" >
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="10,10,10,10" />
+            <Setter Property="Background" Value="LightBlue" />
+        </Style>
+        <!-- Styling for Buttons that are not numbers -->
+        <Style x:Key="Operators" TargetType="Button" >
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="10,10,10,10" />
+            <Setter Property="Background" Value="Teal" />
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Textblock, where the text from the buttons come to -->
+            <TextBlock x:Name="calcText" Text="" FontSize="50" Padding="20,40"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                   Grid.Row="2" Grid.ColumnSpan="4"></TextBlock>
+
+            <!-- Border for textblock -->
+        <Border Grid.Row="2" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="2" CornerRadius="20,20,20,20" />
+
+
+        <!-- Here are non-number buttons -->
+        <Button Grid.Row="3" Grid.Column="2" x:Name="C" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Style="{StaticResource Operators}"
+                Click="C_Click">C</Button>
+
+        <Button Grid.Row="3" Grid.Column="0" x:Name="sqrBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="50" Style="{StaticResource Operators}"
+                Click="sqrBtn_Click">x²</Button>
+
+        <Button Grid.Row="3" Grid.Column="1" x:Name="rootBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="50" Style="{StaticResource Operators}"
+                Click="rootBtn_Click">√</Button>
+
+        <Button Grid.Row="7" Grid.Column="0" x:Name="PlusMinus" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Style="{StaticResource Operators}"
+                Click="PlusMinus_Click">+/-</Button>
+
+        <Button Grid.Row="3" Grid.Column="3" x:Name="Divide" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="50" Style="{StaticResource Operators}"
+                Click="Divide_Click" >÷</Button>
+
+        <Button Grid.Row="4" Grid.Column="3" x:Name="Multiply" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="50" Style="{StaticResource Operators}"
+                Click="Multiply_Click" >×</Button>
+
+        <Button Grid.Row="5" Grid.Column="3" x:Name="Minus" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="50" Style="{StaticResource Operators}"
+                Click="Minus_Click" >–</Button>
+        
+        <Button Grid.Row="6" Grid.Column="3" x:Name="Plus" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="50" Style="{StaticResource Operators}"
+                Click="Plus_Click" >+</Button>
+
+        <Button Grid.Row="7" Grid.Column="3" x:Name="Equal" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="50" Style="{StaticResource Operators}"
+                Click="Equal_Click">=</Button>
+        
+        <Button Grid.Row="7" Grid.Column="2" x:Name="Decimal" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Style="{StaticResource Operators}"
+                Click="Number_Click">.</Button>
+        
+        <!-- Here are buttons that have numbers in them -->
+        <Button Grid.Row="7" Grid.Column="1"  x:Name="zeroBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">0</Button>
+
+        <Button Grid.Row="6" Grid.Column="0" x:Name="oneBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">1</Button>
+
+        <Button Grid.Row="6" Grid.Column="1" x:Name="twoBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">2</Button>
+
+        <Button Grid.Row="6" Grid.Column="2" x:Name="threeBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">3</Button>
+
+        <Button Grid.Row="5" Grid.Column="0" x:Name="fourBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">4</Button>
+
+        <Button Grid.Row="5" Grid.Column="1" x:Name="fiveBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">5</Button>
+
+        <Button Grid.Row="5" Grid.Column="2" x:Name="sixBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">6</Button>
+
+        <Button Grid.Row="4" Grid.Column="0" x:Name="sevenBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">7</Button>
+
+        <Button Grid.Row="4" Grid.Column="1" x:Name="eightBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">8</Button>
+
+        <Button Grid.Row="4" Grid.Column="2" x:Name="nineBtn" HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" FontSize="35" Click="Number_Click">9</Button>
+
+    </Grid>
+</Page>
