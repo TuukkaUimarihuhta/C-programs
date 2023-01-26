@@ -18,7 +18,6 @@
                 <Button Name="exit" Click="exit_Click">Close the app</Button>
                 <ToggleButton Name="drkmd" IsThreeState="False" Checked="drkmd_Checked" Unchecked="drkmd_Unchecked">Dark mode</ToggleButton>
                 <NavigationViewItemHeader>Different programs</NavigationViewItemHeader>
-                <NavigationViewItem Content="Color switching square" Icon="DockLeft" Tag="ColorSquare"/>
                 <NavigationViewItem Content="Calculator" Icon="DockLeft" Tag="Calculator"/>
             </NavigationView.MenuItems>
 
