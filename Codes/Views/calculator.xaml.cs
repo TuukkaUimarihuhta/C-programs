@@ -19,10 +19,13 @@ namespace Codes.Views
 {
     public sealed partial class Calculator : Page
     {
-        double temp = 0;
+        // First number
+        double firstNumber = 0;
 
+        // Operator, which decide the operation
         char operation;
 
+        // what is shown in the screen
         string output = "";
         public Calculator()
         {
@@ -31,10 +34,12 @@ namespace Codes.Views
             this.DataContext = this;
         }
 
+        // Function where you add numbers and a decimal point into a number
         private void Number_Click(object sender, RoutedEventArgs e)
         {
             string added = ((Button)sender).Name;
 
+            // switch statement which is used to add number into the output, allowing you to make multiple digit numbers
             switch (added)
             {
                 case "oneBtn":
@@ -97,80 +102,91 @@ namespace Codes.Views
             }
         }
 
+        // Function for adding numbers
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
             if (output != "")
             {
-                temp = double.Parse(output);
-
+                // firstNumber becomes the number on screen
+                firstNumber = double.Parse(output);
+                // Output becomes blank
                 output = "";
-
+                // Operation changes to plus
                 operation = '+';
             }
         }
 
+        // Function for subtracting numbers
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
             if(output != "")
             {
-                temp = double.Parse(output);
-
+                // firstNumber becomes the number on screen
+                firstNumber = double.Parse(output);
+                // Output becomes blank
                 output = "";
-
+                // Operation changes to minus
                 operation = '-';
             }
         }
 
+        // Function for multiplying numbers
         private void Multiply_Click(object sender, RoutedEventArgs e)
         {
             if (output != "")
             {
-                temp = double.Parse(output);
-
+                // firstNumber becomes the number on screen
+                firstNumber = double.Parse(output);
+                // Output becomes blank
                 output = "";
-
+                // Operation changes to multiply
                 operation = '*';
             }
         }
 
+        // Function for Dividing numbers
         private void Divide_Click(object sender, RoutedEventArgs e)
         {
             if (output != "")
             {
-                temp = double.Parse(output);
-
+                // firstNumber becomes the number on screen
+                firstNumber = double.Parse(output);
+                // Output becomes blank
                 output = "";
-
+                // Operation changes to divide
                 operation = '/';
             }
         }
 
+        // Function that does a certain operation based on the chosen operator, called when = button is pressed
         private void Equal_Click(object sender, RoutedEventArgs e)
         {
-            double outputTemp;
+            // variable for finished number
+            double outputNum;
 
+            // Case chosen based on the used operator
             switch (operation)
             {
                 case '+':
-                    outputTemp = temp + double.Parse(output);
-                    output = outputTemp.ToString();
+                    outputNum = firstNumber + double.Parse(output);
+                    output = outputNum.ToString();
                     calcText.Text = output;
                     break;
                 case '-':
-                    outputTemp = temp - double.Parse(output);
-                    output = outputTemp.ToString();
+                    outputNum = firstNumber - double.Parse(output);
+                    output = outputNum.ToString();
                     calcText.Text = output;
                     break;
                 case '*':
-                    outputTemp = temp * double.Parse(output);
-                    output = outputTemp.ToString();
+                    outputNum = firstNumber * double.Parse(output);
+                    output = outputNum.ToString();
                     calcText.Text = output;
                     break;
                 case '/':
                     if(double.Parse(output) != 0)
                     {
-                        outputTemp = temp / double.Parse(output);
-                        output = outputTemp.ToString();
+                        outputNum = firstNumber / double.Parse(output);
+                        output = outputNum.ToString();
                         calcText.Text = output;
                     }
                     else
@@ -189,6 +205,8 @@ namespace Codes.Views
             calcText.Text = output;
         }
 
+
+        // Function for "clear" button
         private void C_Click(object sender, RoutedEventArgs e)
         {
             output = "";
@@ -196,23 +214,29 @@ namespace Codes.Views
             calcText.Text = output;
         }
 
+        // Function for squared
         private void sqrBtn_Click(object sender, RoutedEventArgs e)
         {
+            // Variable that takes output as a number
             double squared = double.Parse(output);
 
+            // output changes to squared times itself
             output = (squared * squared).ToString();
 
+            // Textbox text changed into output
             calcText.Text = output;
         }
 
+        // Function for square root
         private void rootBtn_Click(object sender, RoutedEventArgs e)
         {
             if(output != "")
             {
+                // variable for output into number
                 double root = double.Parse(output);
-
+                // Using Math.sqrt to get a square root of root as string
                 output = Math.Sqrt(root).ToString();
-
+                // Textbox text show output
                 calcText.Text = output;
             }
         }
